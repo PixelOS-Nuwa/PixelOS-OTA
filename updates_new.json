@@ -1,14 +1,14 @@
 [
   {
-    "datetime": 1792554154,
+    "datetime": 1793668105,
     "files": [
       {
-        "filename": "PixelOS_nuwa-17.0-20261021-0423.zip",
+        "filename": "PixelOS_nuwa-17.0-20261103-0142.zip",
         "os_patch_level": "2026-10-01",
         "os_sdk_level": 37,
-        "sha256": "5b3b4e42b8eb8486fc6a09045ae226c43bb32a73c504be6be2de4631f8bd0c79",
-        "size": 3576808674,
-        "url": "https://downloads.sourceforge.net/project/pixelos-aosp-for-xiaomi-nuwa/PixelOS/PixelOS_nuwa-17.0-20261021-0423.zip"
+        "sha256": "42f830a827a8a0e074c668f84d1da57a77dd55083931e509370a583235df7c64",
+        "size": 3579947522,
+        "url": "https://downloads.sourceforge.net/project/pixelos-aosp-for-xiaomi-nuwa/PixelOS/PixelOS_nuwa-17.0-20261103-0142.zip"
       }
     ],
     "type": "ci",
