@@ -7,7 +7,9 @@ set -euo pipefail
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 android_top="$script_dir/../pixelos"
 artifact=
-output="$script_dir/updates_new.json"
+output="$script_dir/API/updater/nuwa.json"
+legacy_output="$script_dir/updates_new.json"
+write_legacy_feed=true
 url=
 
 die() {
@@ -26,7 +28,7 @@ while (($#)); do
             (($# >= 2)) || die "$1 requires a value"
             case "$1" in
                 --url) url=$2 ;;
-                --output) output=$2 ;;
+                --output) output=$2; write_legacy_feed=false ;;
                 --android-top) android_top=$2 ;;
             esac
             shift 2
@@ -62,7 +64,7 @@ PY
 
 output_dir=$(dirname -- "$output")
 mkdir -p -- "$output_dir"
-temporary=$(mktemp "$output_dir/.updates_new.json.XXXXXX")
+temporary=$(mktemp "$output_dir/.nuwa.json.XXXXXX")
 headers=$(mktemp)
 trap 'rm -f -- "$temporary" "$headers"' EXIT
 
@@ -97,4 +99,10 @@ path.write_text(json.dumps(feed, indent=2) + "\n", encoding="utf-8")
 PY
 python3 "$generator" validate-ota "$temporary"
 mv -f -- "$temporary" "$output"
+if [[ "$write_legacy_feed" == true ]]; then
+    legacy_temporary=$(mktemp "$(dirname -- "$legacy_output")/.updates_new.json.XXXXXX")
+    trap 'rm -f -- "$legacy_temporary" "$headers"' EXIT
+    cp -- "$output" "$legacy_temporary"
+    mv -f -- "$legacy_temporary" "$legacy_output"
+fi
 printf 'Generated %s from %s\n' "$output" "$artifact"
