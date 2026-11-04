@@ -6,6 +6,9 @@ API/updater/nuwa.json, and the changelog is
 API/updater/changelogs/nuwa.md. The ROM ZIP is hosted separately on
 SourceForge.
 
+See OFFICIAL_LAYOUT.md for the complete official directory comparison and
+CertifiedProps adaptation notes.
+
 The root files updates_new.json and nuwa.md remain compatibility paths for
 ROMs already installed with the previous Nuwa overlay. The feed generator
 updates both JSON feeds by default. Keep the root changelog in sync with the
