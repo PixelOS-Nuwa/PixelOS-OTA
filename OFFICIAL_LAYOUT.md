@@ -17,9 +17,9 @@ a78a79c3a77ef5d195e5cd925dd5109f4d048645 (392 tracked files).
 | API/updater/changelogs/*.md | 43 | Keep only API/updater/changelogs/nuwa.md. |
 | API/updater/CertifiedProps | 2 | Adapt both JSON and APK to this ROM; do not copy the official APK. |
 
-The root updates_new.json and nuwa.md remain for installed ROMs whose overlay
-still uses those paths. generate-feed.sh writes both new and legacy feed paths.
-Remove the legacy files only after those installed builds no longer need OTA.
+The root updates_new.json and nuwa.md compatibility files were removed because
+this Nuwa release is installed by sideload and uses the API/updater paths.
+ROMs already installed with the older overlay cannot use their old OTA URLs.
 
 ## CertifiedProps
 
