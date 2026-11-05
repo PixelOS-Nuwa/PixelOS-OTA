@@ -9,6 +9,8 @@ android_top="$script_dir/../pixelos"
 artifact=
 output="$script_dir/API/updater/nuwa.json"
 url=
+incremental=
+incremental_url=
 
 die() {
     printf 'Error: %s\n' "$*" >&2
@@ -16,18 +18,20 @@ die() {
 }
 
 usage() {
-    printf 'Usage: %s OTA.zip [--android-top ANDROID_SOURCE] [--url PUBLIC_HTTPS_URL] [--output JSON_PATH]\n' "$0"
+    printf 'Usage: %s OTA.zip [--incremental DELTA.zip] [--url PUBLIC_HTTPS_URL] [--incremental-url PUBLIC_HTTPS_URL] [--android-top ANDROID_SOURCE] [--output JSON_PATH]\n' "$0"
 }
 
 while (($#)); do
     case "$1" in
         -h|--help) usage; exit 0 ;;
-        --url|--output|--android-top)
+        --url|--output|--android-top|--incremental|--incremental-url)
             (($# >= 2)) || die "$1 requires a value"
             case "$1" in
                 --url) url=$2 ;;
                 --output) output=$2 ;;
                 --android-top) android_top=$2 ;;
+                --incremental) incremental=$2 ;;
+                --incremental-url) incremental_url=$2 ;;
             esac
             shift 2
             ;;
@@ -37,12 +41,25 @@ while (($#)); do
 done
 
 [[ -n "$artifact" && -f "$artifact" ]] || die "OTA ZIP not found: $artifact"
+if [[ -n "$incremental" && ! -f "$incremental" ]]; then
+    die "Incremental OTA ZIP not found: $incremental"
+fi
+if [[ -n "$incremental_url" && -z "$incremental" ]]; then
+    die "--incremental-url requires --incremental"
+fi
 zip_name=${artifact##*/}
 [[ "$zip_name" =~ ^PixelOS_nuwa-([0-9]+\.[0-9]+)-[0-9]{8}-[0-9]{4}\.zip$ ]] || \
     die "Expected PixelOS_nuwa-VERSION-YYYYMMDD-HHMM.zip"
 version=${BASH_REMATCH[1]}
 url=${url:-"https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/$zip_name"}
+if [[ -n "$incremental" ]]; then
+    incremental_name=${incremental##*/}
+    incremental_url=${incremental_url:-"https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/$incremental_name"}
+fi
 [[ "$url" == https://* ]] || die "OTA URL must use HTTPS"
+if [[ -n "$incremental" ]]; then
+    [[ "$incremental_url" == https://* ]] || die "Incremental OTA URL must use HTTPS"
+fi
 generator="$android_top/packages/apps/Updater/tools/pixelos_feed.py"
 [[ -x "$generator" ]] || die "Missing Updater feed generator: $generator"
 command -v curl >/dev/null || die "curl is required"
@@ -64,7 +81,8 @@ output_dir=$(dirname -- "$output")
 mkdir -p -- "$output_dir"
 temporary=$(mktemp "$output_dir/.nuwa.json.XXXXXX")
 headers=$(mktemp)
-trap 'rm -f -- "$temporary" "$headers"' EXIT
+incremental_headers=$(mktemp)
+trap 'rm -f -- "$temporary" "$headers" "$incremental_headers"' EXIT
 
 status=$(curl --silent --show-error --head --location --retry 3 \
     --retry-delay 2 --connect-timeout 20 --max-time 180 \
@@ -96,5 +114,40 @@ feed[0]["files"][0].pop("ota_property_files", None)
 path.write_text(json.dumps(feed, indent=2) + "\n", encoding="utf-8")
 PY
 python3 "$generator" validate-ota "$temporary"
+if [[ -n "$incremental" ]]; then
+    delta_status=$(curl --silent --show-error --head --location --retry 3 \
+        --retry-delay 2 --connect-timeout 20 --max-time 180 \
+        --dump-header "$incremental_headers" --output /dev/null \
+        --write-out '%{http_code} %{url_effective}' \
+        "$incremental_url") || die "Cannot reach incremental OTA URL: $incremental_url"
+    read -r delta_status incremental_resolved_url <<< "$delta_status"
+    [[ "$delta_status" == 200 ]] || die "Incremental URL returned HTTP $delta_status: $incremental_url"
+    delta_remote_size=$(awk '
+        /^HTTP\// { size="" }
+        tolower($1) == "content-length:" { size=$2 }
+        END { gsub(/\r/, "", size); print size }
+    ' "$incremental_headers")
+    delta_local_size=$(stat -Lc '%s' "$incremental")
+    [[ "$delta_remote_size" =~ ^[0-9]+$ && "$delta_remote_size" == "$delta_local_size" ]] || \
+        die "Incremental URL size mismatch: local=$delta_local_size remote=${delta_remote_size:-unknown}"
+
+    range_status=$(curl --silent --show-error --retry 2 \
+        --connect-timeout 20 --max-time 60 --max-filesize 1 --range 0-0 \
+        --dump-header "$incremental_headers" --output /dev/null \
+        --write-out '%{http_code}' "$incremental_resolved_url") || \
+        die "Incremental URL does not support HTTP Range: $incremental_resolved_url"
+    [[ "$range_status" == 206 ]] || \
+        die "Incremental URL must support HTTP Range (expected 206, got $range_status)"
+    content_range=$(awk 'tolower($1) == "content-range:" { value=$2 " " $3 } END { gsub(/\r/, "", value); print value }' "$incremental_headers")
+    [[ "$content_range" == "bytes 0-0/$delta_local_size" ]] || \
+        die "Unexpected incremental Content-Range: ${content_range:-missing}"
+
+    incremental_feed=$(mktemp)
+    trap 'rm -f -- "$temporary" "$headers" "$incremental_headers" "$incremental_feed"' EXIT
+    python3 "$generator" add-incremental "$temporary" "$incremental" \
+        --full-artifact "$artifact" --url "$incremental_url" --output "$incremental_feed"
+    mv -f -- "$incremental_feed" "$temporary"
+    python3 "$generator" validate-ota "$temporary" --incremental-artifact "$incremental"
+fi
 mv -f -- "$temporary" "$output"
 printf 'Generated %s from %s\n' "$output" "$artifact"
