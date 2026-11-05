@@ -16,7 +16,7 @@ Updater only offers it when its timestamp is newer than the installed build.
 ## Publish an OTA
 
 From the Android source tree root, after uploading the exact ZIP to the
-`pixelos-aosp-for-xiaomi-nuwa/PixelOS` directory on SourceForge:
+`aosp-nuwa/PixelOS` directory on SourceForge:
 
 ```sh
 ../pixelos-ota/generate-feed.sh \

@@ -41,7 +41,7 @@ zip_name=${artifact##*/}
 [[ "$zip_name" =~ ^PixelOS_nuwa-([0-9]+\.[0-9]+)-[0-9]{8}-[0-9]{4}\.zip$ ]] || \
     die "Expected PixelOS_nuwa-VERSION-YYYYMMDD-HHMM.zip"
 version=${BASH_REMATCH[1]}
-url=${url:-"https://downloads.sourceforge.net/project/pixelos-aosp-for-xiaomi-nuwa/PixelOS/$zip_name"}
+url=${url:-"https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/$zip_name"}
 [[ "$url" == https://* ]] || die "OTA URL must use HTTPS"
 generator="$android_top/packages/apps/Updater/tools/pixelos_feed.py"
 [[ -x "$generator" ]] || die "Missing Updater feed generator: $generator"
