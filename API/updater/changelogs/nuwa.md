@@ -1,5 +1,9 @@
 # PixelOS for Xiaomi 13 Pro (nuwa)
 
+## Package: `PixelOS_nuwa-17.0-20261105-0036.zip`
+
+- test
+
 ## Package: `PixelOS_nuwa-17.0-20261104-0834.zip`
 
 - Now, We can update PixelOS via OTA.
