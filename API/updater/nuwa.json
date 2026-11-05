@@ -1,14 +1,14 @@
 [
   {
-    "datetime": 1793836588,
+    "datetime": 1793849375,
     "files": [
       {
-        "filename": "PixelOS_nuwa-17.0-20261105-0036.zip",
+        "filename": "PixelOS_nuwa-17.0-20261105-0329.zip",
         "os_patch_level": "2026-10-01",
         "os_sdk_level": 37,
-        "sha256": "46a2a8875f6f106707e88147d85086f8e81573621ebb104eb5c0262b582cf15f",
-        "size": 3579920514,
-        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/PixelOS_nuwa-17.0-20261105-0036.zip"
+        "sha256": "b9a23e810b1e5a89d81c3b2904dbd8aee9a8c7651da68beb0c70bfc6e55c7772",
+        "size": 3579920101,
+        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/PixelOS_nuwa-17.0-20261105-0329.zip"
       }
     ],
     "type": "ci",
