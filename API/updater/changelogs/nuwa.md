@@ -1,5 +1,11 @@
 # PixelOS for Xiaomi 13 Pro (nuwa)
 
+## test updater 0826
+
+- 111
+- 222
+
+
 ## Package: `PixelOS_nuwa-17.0-20261105-0619.zip`
 
 - test update
