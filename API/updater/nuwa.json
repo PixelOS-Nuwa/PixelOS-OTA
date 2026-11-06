@@ -1,17 +1,28 @@
 [
   {
-    "datetime": 1793867211,
+    "datetime": 1793930404,
     "files": [
       {
-        "filename": "PixelOS_nuwa-17.0-20261105-0826.zip",
+        "filename": "PixelOS_nuwa-17.0-20261106-1000.zip",
         "os_patch_level": "2026-10-01",
         "os_sdk_level": 37,
-        "sha256": "6717d002f2eac3cef90a8728283c694255f8a152b566b7b96d4a7861f42209a9",
-        "size": 3579919605,
-        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/PixelOS_nuwa-17.0-20261105-0826.zip"
+        "sha256": "e49ddbdcac88a6f610c123e4639bce47a88b924493487c91c44746dfb3e4253f",
+        "size": 3579919752,
+        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/PixelOS_nuwa-17.0-20261106-1000.zip"
       }
     ],
     "type": "ci",
-    "version": "17.0"
+    "version": "17.0",
+    "incremental": [
+      {
+        "filename": "nuwa-incremental-ota-1793880376-to-1793930404.zip",
+        "os_patch_level": "2026-10-01",
+        "os_sdk_level": 37,
+        "sha256": "50b7581647350ca65d030aba4801b133a44ad97108b521b859c507d88199cb84",
+        "size": 5136383,
+        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/nuwa-incremental-ota-1793880376-to-1793930404.zip",
+        "ota_property_files": "payload_metadata.bin:5769:418248,payload.bin:5769:5127123,payload_properties.txt:5132950:153,apex_info.pb:3091:1664,care_map.pb:4802:920,metadata:69:773,metadata.pb:910:2133                  "
+      }
+    ]
   }
 ]
