@@ -48,7 +48,7 @@ the target ROM configuration:
 ```sh
 source build/envsetup.sh
 lunch custom_nuwa-cp2a-userdebug
-m target-files-package otatools
+mka target-files-package pixelos otatools -j$(nproc --all)
 ```
 
 Create a source-specific A/B OTA from the old and new target-files packages:
@@ -58,6 +58,13 @@ out/host/linux-x86/bin/ota_from_target_files \
   -i /path/to/old-nuwa-target_files.zip \
   /path/to/new-nuwa-target_files.zip \
   out/target/product/nuwa/PixelOS_nuwa-incremental-OLD-to-NEW.zip
+```
+eg: 
+```sh
+out/host/linux-x86/bin/ota_from_target_files \
+  -i out/target/product/nuwa/obj/PACKAGING/target_files_intermediates/custom_nuwa-17.0-20261108-0917-target_files.zip \
+  out/target/product/nuwa/obj/PACKAGING/target_files_intermediates/custom_nuwa-17.0-20261108-1728-target_files.zip \
+  out/target/product/nuwa/nuwa-incremental-ota-20261108-0917-to-20261108-1728.zip
 ```
 
 For release builds, sign both target-files packages with the same release
@@ -72,8 +79,17 @@ regenerate the feed using both exact local artifacts:
 ```sh
 ../pixelos-ota/generate-feed.sh \
   out/target/product/nuwa/PixelOS_nuwa-17.0-YYYYMMDD-HHMM.zip \
-  --incremental out/target/product/nuwa/PixelOS_nuwa-incremental-OLD-to-NEW.zip
+  --incremental \
+  out/target/product/nuwa/PixelOS_nuwa-incremental-OLD-to-NEW.zip
 ```
+eg: 
+
+```sh
+../pixelos-ota/generate-feed.sh \
+  out/target/product/nuwa/PixelOS_nuwa-17.0-20261108-1728.zip \
+  --incremental \
+  out/target/product/nuwa/nuwa-incremental-ota-20261108-0917-to-20261108-1728.zip
+  ```
 
 The script checks that the full package and delta are publicly reachable and
 match their local sizes. It also requires the incremental URL to return HTTP

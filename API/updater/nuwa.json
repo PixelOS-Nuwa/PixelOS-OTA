@@ -1,27 +1,27 @@
 [
   {
-    "datetime": 1794100620,
+    "datetime": 1794127206,
     "files": [
       {
-        "filename": "PixelOS_nuwa-17.0-20261108-0917.zip",
-        "os_patch_level": "2026-10-01",
+        "filename": "PixelOS_nuwa-17.0-20261108-1728.zip",
+        "os_patch_level": "2026-11-01",
         "os_sdk_level": 37,
-        "sha256": "594c21fbb5b2e06ebb776d4f062791c95547ca5b1bb6e7dd85722e46d4e240e9",
-        "size": 3579917760,
-        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/PixelOS_nuwa-17.0-20261108-0917.zip"
+        "sha256": "bddec5bc3b5ebe580dfc349bb13b7ada16800f8dd96f876915490f4d6066d1d1",
+        "size": 3579913514,
+        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/PixelOS_nuwa-17.0-20261108-1728.zip"
       }
     ],
     "type": "ci",
     "version": "17.0",
     "incremental": [
       {
-        "filename": "nuwa-incremental-ota-20261106-0504-to-20261108-0917.zip",
-        "os_patch_level": "2026-10-01",
+        "filename": "nuwa-incremental-ota-20261108-0917-to-20261108-1728.zip",
+        "os_patch_level": "2026-11-01",
         "os_sdk_level": 37,
-        "sha256": "7c3167b95a77a63428d20dad756b6ccdc7da8392544b40ae2a433978646ff22d",
-        "size": 18875381,
-        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/nuwa-incremental-ota-20261106-0504-to-20261108-0917.zip",
-        "ota_property_files": "payload_metadata.bin:5785:500082,payload.bin:5785:18866104,payload_properties.txt:18871947:154,apex_info.pb:3107:1664,care_map.pb:4818:920,metadata:69:781,metadata.pb:918:2141                    "
+        "sha256": "fe24f3f71e6efa90e563ee19a0cdceb0e4763f096f318f0a9493947a5e0955c5",
+        "size": 55461565,
+        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/nuwa-incremental-ota-20261108-0917-to-20261108-1728.zip",
+        "ota_property_files": "payload_metadata.bin:5785:479772,payload.bin:5785:55452288,payload_properties.txt:55458131:154,apex_info.pb:3107:1664,care_map.pb:4818:920,metadata:69:781,metadata.pb:918:2141                    "
       }
     ]
   }
