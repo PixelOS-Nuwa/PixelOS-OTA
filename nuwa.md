@@ -1,5 +1,8 @@
 # PixelOS for Xiaomi 13 Pro (nuwa)
 
+## Package: `PixelOS_nuwa-17.0-20261109-1054.zip`
+
+- Platform upstream
 
 ## Package: `PixelOS_nuwa-17.0-20261108-1728.zip`
 
