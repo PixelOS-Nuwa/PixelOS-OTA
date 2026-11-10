@@ -47,7 +47,11 @@ the target ROM configuration:
 
 ```sh
 source build/envsetup.sh
+```
+```sh
 lunch custom_nuwa-cp2a-userdebug
+```
+```sh
 mka target-files-package pixelos otatools -j$(nproc --all)
 ```
 
@@ -61,7 +65,13 @@ out/host/linux-x86/bin/ota_from_target_files \
 ```
 eg: 
 ```sh
-out/host/linux-x86/bin/ota_from_target_files \
+echo 'export TMPDIR=/root/android/pixelos/out/target/product/nuwa' >> ~/.bashrc
+```
+```sh
+source ~/.bashrc
+```
+```sh
+TMPDIR=/root/android/pixelos/ota-tmp out/host/linux-x86/bin/ota_from_target_files \
   -i out/target/product/nuwa/obj/PACKAGING/target_files_intermediates/custom_nuwa-17.0-20261108-0917-target_files.zip \
   out/target/product/nuwa/obj/PACKAGING/target_files_intermediates/custom_nuwa-17.0-20261108-1728-target_files.zip \
   out/target/product/nuwa/nuwa-incremental-ota-20261108-0917-to-20261108-1728.zip
