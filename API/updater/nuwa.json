@@ -1,27 +1,27 @@
 [
   {
-    "datetime": 1794297841,
+    "datetime": 1794840704,
     "files": [
       {
-        "filename": "PixelOS_nuwa-17.0-20261110-1703.zip",
+        "filename": "PixelOS_nuwa-17.0-20261116-2251.zip",
         "os_patch_level": "2026-11-01",
         "os_sdk_level": 37,
-        "sha256": "5d70febbfac4f678b2d6eb7053e0d66fb6840b6f2274f597cdd0328a7b5d55d3",
-        "size": 3579906148,
-        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/PixelOS_nuwa-17.0-20261110-1703.zip"
+        "sha256": "abf6344e30289f412a604102b85a942f54e09cdb98ea335bc735970e4df2274e",
+        "size": 3579850412,
+        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/PixelOS_nuwa-17.0-20261116-2251.zip"
       }
     ],
     "type": "ci",
     "version": "17.0",
     "incremental": [
       {
-        "filename": "nuwa-incremental-ota-20261110-1000-to-20261110-1703.zip",
+        "filename": "nuwa-incremental-ota-20261116-1756-to-20261116-2251.zip",
         "os_patch_level": "2026-11-01",
         "os_sdk_level": 37,
-        "sha256": "05860c4de371042bbde43d183ae516b0e3de5de10868e55617b9afe976d400b6",
-        "size": 38614835,
-        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/nuwa-incremental-ota-20261110-1000-to-20261110-1703.zip",
-        "ota_property_files": "payload_metadata.bin:5785:472167,payload.bin:5785:38605558,payload_properties.txt:38611401:154,apex_info.pb:3107:1664,care_map.pb:4818:920,metadata:69:781,metadata.pb:918:2141                    "
+        "sha256": "5c3582a91b12f313aea690800af9cb6397cc07daf2e0d3fff107317aa80005cc",
+        "size": 5163121,
+        "url": "https://downloads.sourceforge.net/project/aosp-nuwa/PixelOS/nuwa-incremental-ota-20261116-1756-to-20261116-2251.zip",
+        "ota_property_files": "payload_metadata.bin:5769:416157,payload.bin:5769:5153861,payload_properties.txt:5159688:153,apex_info.pb:3091:1664,care_map.pb:4802:920,metadata:69:773,metadata.pb:910:2133                  "
       }
     ]
   }
