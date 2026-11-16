@@ -6,8 +6,7 @@ API/updater/nuwa.json, and the changelog is
 API/updater/changelogs/nuwa.md. The ROM ZIP is hosted separately on
 SourceForge.
 
-See OFFICIAL_LAYOUT.md for the complete official directory comparison and
-CertifiedProps adaptation notes.
+See OFFICIAL_LAYOUT.md for the complete official directory comparison.
 
 The feed lists the current nuwa build and may pair it with one source-specific
 incremental OTA. Updater checks whether that payload applies to the installed
